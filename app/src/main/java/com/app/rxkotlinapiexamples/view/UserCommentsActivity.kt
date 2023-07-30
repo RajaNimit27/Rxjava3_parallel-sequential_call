@@ -13,7 +13,7 @@ import com.app.rxkotlinapiexamples.networkservice.ApiClient
 import com.app.rxkotlinapiexamples.viewmodel.HomeViewModel
 
 
-class UserPostsActivity : AppCompatActivity() {
+class UserCommentsActivity : AppCompatActivity() {
 
     lateinit var userPostsBinding:ActivityUserPostsBinding
     lateinit var userCommentsAdapter: UserCommentsAdapter
@@ -23,7 +23,7 @@ class UserPostsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        userPostsBinding=DataBindingUtil.setContentView(this@UserPostsActivity,R.layout.activity_user_posts)
+        userPostsBinding=DataBindingUtil.setContentView(this@UserCommentsActivity,R.layout.activity_user_posts)
         initView()
         initViewModel()
         setUpObserver()
@@ -31,7 +31,7 @@ class UserPostsActivity : AppCompatActivity() {
 
     private fun initView() {
         try {
-            var lm = LinearLayoutManager(this@UserPostsActivity, LinearLayoutManager.VERTICAL,false)
+            var lm = LinearLayoutManager(this@UserCommentsActivity, LinearLayoutManager.VERTICAL,false)
             userPostsBinding.recyclerview.layoutManager = lm
             userCommentsAdapter= UserCommentsAdapter()
             userPostsBinding.recyclerview.adapter=userCommentsAdapter
@@ -53,7 +53,7 @@ class UserPostsActivity : AppCompatActivity() {
     /*Livedata from View Model*/
     private fun setUpObserver() {
         try {
-            homeViewModel.resourcePosts.observe(this@UserPostsActivity) {
+            homeViewModel.resourcePosts.observe(this@UserCommentsActivity) {
                 when (it.status) {
                     Status.LOADING -> {
                     }
@@ -65,7 +65,7 @@ class UserPostsActivity : AppCompatActivity() {
 
                     }
                     Status.ERROR -> {
-                        ApiClient.onErrorHandler(it.error!!, this@UserPostsActivity)
+                        ApiClient.onErrorHandler(it.error!!, this@UserCommentsActivity)
                     }
                 }
 
